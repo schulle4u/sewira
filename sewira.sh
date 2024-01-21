@@ -1,16 +1,32 @@
 #!/bin/bash
 # SeWiRa - ein Selfmade Wifi Radio
-# Erstellt von Steffen Schultz
+# Copyright (c) 2024 Steffen Schultz
+
+# Einige Pfade
+MPVBIN=/usr/bin/mpv
+TTSBIN=/usr/bin/espeak-ng
 
 # Eingabeprompt beschriften
 PS3="Sendernummer: "
 
-# Array mit Sendernamen und Stream-Adressen
+# Array mit Sendernamen und Stream-Adressen definieren und einlesen
 declare -A STATION
 . ./stations.txt
 
+# Sprachausgabenfunktion
+speaktext() {
+  if [ -e "$TTSBIN" ]; then
+    "$TTSBIN" -v de -a 100 -s 300 "$1" &>/dev/null &
+  fi
+}
+
 clear
-echo "Radiosender auswählen, STRG+C zum Beenden:"
+
+# Spreche eine Willkommensmeldung falls Sprachausgabe installiert ist
+speaktext "Willkommen bei Sewira! Radiosender auswählen, 0 zum Beenden eingeben"
+
+# Bildschirmmeldung über der Senderliste
+echo "Radiosender auswählen, 0 zum Beenden eingeben:"
 
 # Sender-Array durchlaufen
 select ENTRY in "${!STATION[@]}"; do
@@ -18,16 +34,20 @@ select ENTRY in "${!STATION[@]}"; do
     TITLE="${ENTRY}"
     URL=${STATION[${ENTRY}]}
     if pidof mpv; then # Falls mpv schon läuft, dann abschießen und anschließend mit dem gewünschten Sender starten
-      killall mpv && mpv "$URL" &>/dev/null &
+      killall mpv && "$MPVBIN" "$URL" &>/dev/null &
     else # mpv mit dem aufgerufenen Sender starten
-      mpv "$URL" &>/dev/null &
+      "$MPVBIN" "$URL" &>/dev/null &
     fi
     
     # Falls eine Sprachausgabe konfiguriert ist, sage den Sender an
-    if [ -e /usr/bin/espeak-ng ]; then
-      /usr/bin/espeak-ng -v de -a 200 -s 400 "$TITLE wird abgespielt"
-    fi
+    speaktext "$TITLE wird abgespielt"
+    
   else # Sendernummer ungültig
     echo "Ungültige Eingabe"
+    speaktext "Radio wird beendet."
+    if pidof mpv; then # Vor dem exit ein eventuell laufendes MPV beenden
+      killall mpv
+    fi
+    exit 0 # Skript wird beendet
   fi
 done
