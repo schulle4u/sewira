@@ -9,6 +9,9 @@ TTSBIN=/usr/bin/espeak-ng
 # Eingabeprompt beschriften
 PS3="Sendernummer: "
 
+# Sleeptimer beim Starten des Senders, Wert erhöhen falls es zu Überlappungen bei Verwendung der Sprachausgabe kommt
+SLEEPTIMER="0.5"
+
 # Array mit Sendernamen und Stream-Adressen definieren und einlesen
 declare -A STATION
 . ./stations.txt
@@ -34,9 +37,9 @@ select ENTRY in "${!STATION[@]}"; do
     TITLE="${ENTRY}"
     URL=${STATION[${ENTRY}]}
     if pidof mpv; then # Falls mpv schon läuft, dann abschießen und anschließend mit dem gewünschten Sender starten
-      killall mpv && "$MPVBIN" "$URL" &>/dev/null &
+      killall mpv && sleep "$SLEEPTIMER" && "$MPVBIN" "$URL" &>/dev/null &
     else # mpv mit dem aufgerufenen Sender starten
-      "$MPVBIN" "$URL" &>/dev/null &
+      sleep "$SLEEPTIMER" && "$MPVBIN" "$URL" &>/dev/null &
     fi
     
     # Falls eine Sprachausgabe konfiguriert ist, sage den Sender an
