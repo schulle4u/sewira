@@ -27,6 +27,11 @@ SeWiRa (Selfmade Wifi Radio) versucht dabei nicht das Rad(io) neu zu erfinden. S
 
 Nach dem Aufruf von `sewira.sh` erscheint ein Menü mit nummerierten Sendern. Der gewünschte Sender wird durch Eingabe der dargestellten Nummer und Enter aktiviert. Ist ein Sender nicht vorhanden, erfolgt eine entsprechende Fehlermeldung und das Skript wird beendet. (Ja, ziemlich unelegante Ausschaltfunktion mit Optimierungsbedarf. 😁) Für die Wiedergabe wird MPV verwendet, jedoch ist der Player nur im Hintergrund aktiv, damit das Sendermenü immer für die nächste Eingabe geöffnet bleiben kann. Eine Steuerung des Players ist daher nicht vorgesehen. 
 
+## Todo/Brainstorming
+
+* Bessere Sortierung der Senderliste: Assoziative Arrays unterstützen dies nicht von Haus aus, daher geht bei jedem Update der Senderliste die Sortierung verloren. Eventuell Neugestaltung der Streamliste als Verzeichnis mit m3u-Dateien?
+* Lokalisierung: Im Moment sträube ich mich noch ein wenig dagegen, für 5 oder 6 Strings mit Gettext zu arbeiten.
+
 ## Danksagung
 
 All den Fleißigen der schreibenden Zunft, die mir mit ihren Mails und ungezählten Tutorials helfen, das Mysterium Shell zu verstehen, um mein erstes Projekt dieser Art ins Leben zu rufen. 
