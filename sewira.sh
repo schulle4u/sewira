@@ -32,6 +32,7 @@ speaktext "Willkommen bei Sewira! Radiosender auswählen, 0 zum Beenden eingeben
 echo "Radiosender auswählen, 0 zum Beenden eingeben:"
 
 # Sender-Array durchlaufen
+COLUMNS=1 # Vermeide mehrspaltige Anzeige bei längeren Senderlisten
 select ENTRY in "${!STATION[@]}"; do
   if [ -n "$ENTRY" ]; then # Eingabe korrekt
     TITLE="${ENTRY}"
