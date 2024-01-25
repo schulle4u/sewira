@@ -12,6 +12,9 @@ PS3="Sendernummer: "
 # Sleeptimer beim Starten des Senders, Wert erhöhen falls es zu Überlappungen bei Verwendung der Sprachausgabe kommt
 SLEEPTIMER="0.5"
 
+# Wechsle ins Skriptverzeichnis, falls es von anderswo aufgerufen wird
+cd `dirname $0`
+
 # Array mit Sendernamen und Stream-Adressen definieren und einlesen
 declare -A STATION
 . ./stations.txt
