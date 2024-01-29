@@ -19,18 +19,13 @@ SeWiRa (Selfmade Wifi Radio) versucht dabei nicht das Rad(io) neu zu erfinden. S
 
 * [Alle Dateien herunterladen](https://github.com/schulle4u/sewira/archive/refs/heads/main.zip) und in einem beliebigen Ordner entpacken, z. B. nach `/home/Benutzer/sewira`. 
 * Im Ordner die Datei `sewira.sh` ausführbar machen: `chmod +x ./sewira.sh`
-* In der Datei `stations.txt` die gewünschten Streams eintragen. Die korrekte Syntax wird an einem Beispiel veranschaulicht. 
+* Im Unterverzeichnis `streams` die M3u-Dateien für die gewünschten Sender ablegen. In jeder Datei sollte nur ein Stream vorhanden sein. 
 * Optional: Ans Ende der Datei `~/.profile` einen Aufruf zur `sewira.sh` hinterlegen. Bei Systemen mit automatischem Login startet sich dann direkt das Radiomenü und man benötigt nur noch den Ziffernblock. 
 * Optional: Einen Shell-Alias anlegen, um das Sendermenü auch per Ziffernsteuerung nach dem Beenden des Radios wieder aufrufen zu können, z. B. mit `alias 0=~/sewira/sewira.sh`
 
 ## Verwendung
 
-Nach dem Aufruf von `sewira.sh` erscheint ein Menü mit nummerierten Sendern. Der gewünschte Sender wird durch Eingabe der dargestellten Nummer und Enter aktiviert. Ist ein Sender nicht vorhanden, erfolgt eine entsprechende Fehlermeldung und das Skript wird beendet. (Ja, ziemlich unelegante Ausschaltfunktion mit Optimierungsbedarf. 😁) Für die Wiedergabe wird MPV verwendet, jedoch ist der Player nur im Hintergrund aktiv, damit das Sendermenü immer für die nächste Eingabe geöffnet bleiben kann. Eine Steuerung des Players ist daher nicht vorgesehen. 
-
-## Todo/Brainstorming
-
-* Bessere Sortierung der Senderliste: Assoziative Arrays unterstützen dies nicht von Haus aus, daher geht bei jedem Update der Senderliste die Sortierung verloren. Eventuell Neugestaltung der Streamliste als Verzeichnis mit m3u-Dateien?
-* Lokalisierung: Im Moment sträube ich mich noch ein wenig dagegen, für 5 oder 6 Strings mit Gettext zu arbeiten.
+Nach dem Aufruf von `sewira.sh` erscheint ein Menü mit nummerierten Sendern. Der gewünschte Sender wird durch Eingabe der dargestellten Nummer und Enter aktiviert. Ist ein Sender nicht vorhanden, erfolgt eine entsprechende Fehlermeldung und das Skript wird beendet. (Ja, ziemlich unelegante Ausschaltfunktion mit Optimierungsbedarf. 😁) Die Sortierung der Sender erfolgt anhand des  Dateinamens, also beispielsweise alphabetisch. Für die Wiedergabe wird MPV verwendet, jedoch ist der Player nur im Hintergrund aktiv, damit das Sendermenü immer für die nächste Eingabe geöffnet bleiben kann. Eine Steuerung des Players ist daher nicht vorgesehen. 
 
 ## Danksagung
 

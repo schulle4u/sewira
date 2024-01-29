@@ -1,3 +1,0 @@
-# Liste der Stationen
-# Format: STATION["Stationsname"]="http://stream.example.com:8000/radio.mp3"
-STATION["Powerradio4u"]="http://stream.powerradio4u.de:8000/p4u.mp3"
