@@ -32,7 +32,7 @@ echo "Verzeichnis der Streamdateien: $STREAMS"
 echo "Radiosender auswählen, 0 zum Beenden eingeben:"
 
 # Array mit Sendernamen und Stream-Adressen definieren und einlesen
-FILES=("$STREAMS"/*.m3u)
+FILES=("$STREAMS"*.m3u)
 
 if [ ! -e "$FILES" ]; then
   echo "Keine gültigen Streams gefunden"
