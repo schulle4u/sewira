@@ -1,20 +1,20 @@
 #!/bin/bash
-# SeWiRa - ein Selfmade Wifi Radio
+# SeWiRa - the Selfmade Wifi Radio
 # Copyright (c) 2024 Steffen Schultz
 
-# Einige Pfade
+# Configure some paths
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MPVBIN="/usr/bin/mpv"
 TTSBIN="/usr/bin/espeak-ng"
 STREAMS=$SCRIPT_DIR"/streams/"
 
-# Eingabeprompt beschriften
+# Change the default PS3 prompt for program number input
 PS3="Sendernummer: "
 
-# Sleeptimer beim Starten des Senders, Wert erhöhen falls es zu Überlappungen bei Verwendung der Sprachausgabe kommt
+# Sleep between station announcement and  playback. Increase to avoid overlapping
 SLEEPTIMER="0.5"
 
-# Sprachausgabenfunktion
+# Text to speech function
 speaktext() {
   if [ -e "$TTSBIN" ]; then
     "$TTSBIN" -v de -a 100 -s 300 "$1" &>/dev/null &
@@ -23,45 +23,45 @@ speaktext() {
 
 clear
 
-# Spreche eine Willkommensmeldung falls Sprachausgabe installiert ist
+# Speak a welcome message
 speaktext "Willkommen bei Sewira! Radiosender auswählen, 0 zum Beenden eingeben"
 
-# Bildschirmmeldung über der Senderliste
+# On-screen messages above the station list
 echo "Willkommen bei Sewira!"
 echo "Verzeichnis der Streamdateien: $STREAMS"
 echo "Radiosender auswählen, 0 zum Beenden eingeben:"
 
-# Array mit Sendernamen und Stream-Adressen definieren und einlesen
+# Define our array of files from the streams directory
 FILES=("$STREAMS"*.m3u)
 
-if [ ! -e "$FILES" ]; then
+if [ ! -e "$FILES" ]; then # No valid streams are available
   echo "Keine gültigen Streams gefunden"
-else
-  # Sender-Array durchlaufen
-  COLUMNS=1 # Vermeide mehrspaltige Anzeige bei längeren Senderlisten
+else # Build the menu
+  COLUMNS=1 # Avoid multiple columns for better readability
   select ENTRY in "${FILES[@]##*/}"; do
 
-    if [[ -n "$ENTRY" ]]; then # Eingabe korrekt
+    if [[ -n "$ENTRY" ]]; then # Station exists
       TITLE="$ENTRY"
       URL=$(grep -oE "http[s]?://\S+" "$STREAMS$ENTRY")
 
-      # Abspielbefehle
-      if pidof mpv; then # Falls mpv schon läuft, dann abschießen und anschließend mit dem gewünschten Sender starten
+      # Playback commands
+      # We don't want mpv to shove off our menu, therefore send it into background
+      if pidof mpv; then # Kill an already playing mpv instance before starting the next stream
         killall mpv && sleep "$SLEEPTIMER" && "$MPVBIN" "$URL" &>/dev/null &
-      else # mpv mit dem aufgerufenen Sender starten
+      else # Simply start the stream
         sleep "$SLEEPTIMER" && "$MPVBIN" "$URL" &>/dev/null &
       fi
     
-      # Falls eine Sprachausgabe konfiguriert ist, sage den Sender an
+      # Announce station name
       speaktext "$TITLE wird abgespielt"
     
-    else # Sendernummer ungültig
+    else # Invalid program number, kill the menu
       echo "Ungültige Eingabe"
       speaktext "Radio wird beendet."
-      if pidof mpv; then # Vor dem exit ein eventuell laufendes MPV beenden
+      if pidof mpv; then # Kill a possibly running mpv
         killall mpv
       fi
-      exit 1 # Skript wird beendet
+      exit 1 # Bye bye
     fi
   done
 fi
