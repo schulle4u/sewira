@@ -51,10 +51,9 @@ else # Build the menu
       else # Simply start the stream
         sleep "$SLEEPTIMER" && "$MPVBIN" "$URL" &>/dev/null &
       fi
-    
+      
       # Announce station name
       speaktext "$TITLE wird abgespielt"
-    
     else # Invalid program number, kill the menu
       echo "Ungültige Eingabe"
       speaktext "Radio wird beendet."
