@@ -1,3 +1,5 @@
+<p align="right"><a href="README-en.md">English</a> &nbsp; <a href="README.md">Deutsch</a></p>
+
 # SeWiRa
 Ein Selfmade Wifi Radio.
 

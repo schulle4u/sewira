@@ -1,3 +1,5 @@
+<p align="right"><a href="README-en.md">English</a> &nbsp; <a href="README.md">Deutsch</a></p>
+
 # SeWiRa
 A self-made Wifi Radio.
 
@@ -18,7 +20,7 @@ One day I asked myself: How easy can it be to build a Wifi radio without using s
 * Clone or [Download this repository](https://github.com/schulle4u/sewira/archive/refs/heads/main.zip) into any folder, e.g. `/home/username/sewira`. 
 * Make `sewira.sh` executable: `chmod +x ./sewira.sh`
 * Change into the `streams` directory, and add your m3u files. One stream per file. Some german example stations are already available.
-* Optionally: For more convenience, open the file `~/.profile`  and add a call for `sewira.sh` at the end. This will ensure that the station list is active upon login or system startup, if you have configured auto-login. 
+* Optionally: For more convenience, open the file `~/.profile`  and add a call for `sewira.sh` at the bottom. This will ensure that the station list is active upon login or system startup, if you have configured auto-login. 
 * Optionally: Add a shell alias to bring back the menu after closing the radio without restarting the system, e.g. `alias 0=~/sewira/sewira.sh`
 
 ## Usage
