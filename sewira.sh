@@ -40,7 +40,7 @@ else # Build the menu
   COLUMNS=1 # Avoid multiple columns for better readability
   select ENTRY in "${FILES[@]##*/}"; do
 
-    if [[ -n "$ENTRY" ]]; then # Station exists
+    if [ -n "$ENTRY" ]; then # Station exists
       TITLE="$ENTRY"
       URL=$(grep -oE "http[s]?://\S+" "$STREAMS$ENTRY")
 
