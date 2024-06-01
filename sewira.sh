@@ -11,7 +11,7 @@ STREAMS=$SCRIPT_DIR"/streams/"
 # Change the default PS3 prompt for program number input
 PS3="Sendernummer: "
 
-# Sleep between station announcement and  playback. Increase to avoid overlapping
+# Sleep between station announcement and playback. Increase to avoid overlapping
 SLEEPTIMER="0.5"
 
 # Text to speech function
@@ -39,8 +39,14 @@ if [ ! -e "$FILES" ]; then # No valid streams are available
 else # Build the menu
   COLUMNS=1 # Avoid multiple columns for better readability
   select ENTRY in "${FILES[@]##*/}"; do
-
-    if [ -n "$ENTRY" ]; then # Station exists
+    if [ "$REPLY" == "0" ]; then
+      echo "Beenden..."
+      speaktext "Radio wird beendet."
+      if pidof mpv; then # Kill a possibly running mpv
+        killall mpv
+      fi
+      exit 0 # Exit successfully
+    elif [ -n "$ENTRY" ]; then # Station exists
       TITLE="$ENTRY"
       URL=$(grep -oE "http[s]?://\S+" "$STREAMS$ENTRY")
 
@@ -51,16 +57,11 @@ else # Build the menu
       else # Simply start the stream
         sleep "$SLEEPTIMER" && "$MPVBIN" "$URL" &>/dev/null &
       fi
-      
+
       # Announce station name
       speaktext "$TITLE wird abgespielt"
-    else # Invalid program number, kill the menu
+    else # Invalid program number, continue the loop
       echo "Ungültige Eingabe"
-      speaktext "Radio wird beendet."
-      if pidof mpv; then # Kill a possibly running mpv
-        killall mpv
-      fi
-      exit 1 # Bye bye
     fi
   done
 fi

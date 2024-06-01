@@ -25,7 +25,7 @@ One day I asked myself: How easy can it be to build a Wifi radio without using s
 
 ## Usage
 
-After calling `sewira.sh` a menu with numbered stations appears. The desired channel is activated by typing the displayed number and pressing Enter. If a channel is not available, an error message is displayed and the script is aborted. (Yes, a rather inelegant shutdown function that needs optimization. 😁) The channels are sorted by filename, usually alphabetically. By prefixing the filename with a number, you can influence the sorting like in a playlist. MPV is used for playback, but the player is only active in the background to keep the station menu open for the next input. It is therefore not possible to control the player itself. 
+After calling `sewira.sh` a menu with numbered stations appears. The desired channel is activated by typing the displayed number and pressing Enter. If a channel is not available, an error message is displayed. Press 0 to exit the menu. The channels are sorted by filename, usually alphabetically. By prefixing the filename with a number, you can influence the sorting like in a playlist. MPV is used for playback, but the player is only active in the background to keep the station menu open for the next input. It is therefore not possible to control the player itself. 
 
 ## More information and similar projects
 
