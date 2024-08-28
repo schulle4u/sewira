@@ -18,16 +18,16 @@ One day I asked myself: How easy can it be to build a Wifi radio without using s
 ### Installation
 
 * Clone or [Download this repository](https://github.com/schulle4u/sewira/archive/refs/heads/main.zip) into any folder, e.g. `/home/username/sewira`. 
-* Make `sewira.sh` executable: `chmod +x ./sewira.sh`
+* Make `sewira` executable: `chmod +x ./sewira`
 * Change into the `streams` directory, and add your m3u files. One stream per file. Some german example stations are already available.
-* Optionally: For more convenience, open the file `~/.profile`  and add a call for `sewira.sh` at the bottom. This will ensure that the station list is active upon login or system startup, if you have configured auto-login. 
-* Optionally: Add a shell alias to bring back the menu after closing the radio without restarting the system, e.g. `alias 0=~/sewira/sewira.sh`
+* Optionally: For more convenience, open the file `~/.profile`  and add a call for `sewira` at the bottom. This will ensure that the station list is active upon login or system startup, if you have configured auto-login. 
+* Optionally: Add a shell alias to bring back the menu after closing the radio without restarting the system, e.g. `alias 0=~/sewira/sewira`
 
 Sewira also can be installed as system-wide command. Enter `sudo make install` in the source code directory if you wish to do this. The example streams will be located at `$HOME/sewira/streams/`. 
 
 ## Usage
 
-After calling `sewira.sh` a menu with numbered stations appears. The desired channel is activated by typing the displayed number and pressing Enter. If a channel is not available, an error message is displayed. Press 0 to exit the menu. The channels are sorted by filename, usually alphabetically. By prefixing the filename with a number, you can influence the sorting like in a playlist. MPV is used for playback, but the player is only active in the background to keep the station menu open for the next input. It is therefore not possible to control the player itself. 
+After calling `sewira` a menu with numbered stations appears. The desired channel is activated by typing the displayed number and pressing Enter. If a channel is not available, an error message is displayed. Press 0 to exit the menu. The channels are sorted by filename, usually alphabetically. By prefixing the filename with a number, you can influence the sorting like in a playlist. MPV is used for playback, but the player is only active in the background to keep the station menu open for the next input. It is therefore not possible to control the player itself. 
 
 You can also start Sewira with a different streams directory, e.g. `sewira /home/username/sewira/more-streams/`. 
 

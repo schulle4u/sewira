@@ -18,10 +18,10 @@ Wie einfach kann es sein, ein WLAN-Radio zu bauen, ohne auf Lötkolben, 3d-Druck
 ### Installation
 
 * Das Repository clonen oder [Alle Dateien herunterladen](https://github.com/schulle4u/sewira/archive/refs/heads/main.zip) und in einem beliebigen Ordner entpacken, z. B. nach `/home/Benutzer/sewira`. 
-* Im Ordner die Datei `sewira.sh` ausführbar machen: `chmod +x ./sewira.sh`
+* Im Ordner die Datei `sewira` ausführbar machen: `chmod +x ./sewira`
 * Im Unterverzeichnis `streams` die M3u-Dateien für die gewünschten Sender ablegen. In jeder Datei sollte nur ein Stream vorhanden sein. Einige deutschsprachige Beispielsender sind bereits vorhanden.
-* Optional: Ans Ende der Datei `~/.profile` einen Aufruf zur `sewira.sh` hinterlegen. Bei Systemen mit automatischem Login startet sich dann direkt das Radiomenü und man benötigt nur noch den Ziffernblock. 
-* Optional: Einen Shell-Alias anlegen, um das Sendermenü auch per Ziffernsteuerung nach dem Beenden des Radios wieder aufrufen zu können, z. B. mit `alias 0=~/sewira/sewira.sh`
+* Optional: Ans Ende der Datei `~/.profile` einen Aufruf zur `sewira` hinterlegen. Bei Systemen mit automatischem Login startet sich dann direkt das Radiomenü und man benötigt nur noch den Ziffernblock. 
+* Optional: Einen Shell-Alias anlegen, um das Sendermenü auch per Ziffernsteuerung nach dem Beenden des Radios wieder aufrufen zu können, z. B. mit `alias 0=~/sewira/sewira`
 
 Sewira kann auch als systemweiter Befehl installiert werden. Hierzu den Befehl `sudo make install` im Quellcode-Verzeichnis ausführen. Die Beispiel-Streams werden nach `$HOME/sewira/streams/` kopiert. 
 
