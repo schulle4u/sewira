@@ -6,7 +6,15 @@
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 MPVBIN="/usr/bin/mpv"
 TTSBIN="/usr/bin/espeak-ng"
-STREAMS=$SCRIPT_DIR"/streams/"
+
+# Looking for streams
+if [[ -n "$1" && -d "$1" ]]; then
+  STREAMS="$1"
+elif [[ -d "$HOME/sewira/streams/" ]]; then
+  STREAMS="$HOME/sewira/streams/"
+else
+  STREAMS=$SCRIPT_DIR"/streams/"
+fi
 
 # Change the default PS3 prompt for program number input
 PS3="Sendernummer: "
