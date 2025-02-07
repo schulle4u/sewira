@@ -70,6 +70,7 @@ else # Build the menu
       speaktext "$TITLE wird abgespielt"
     else # Invalid program number, continue the loop
       echo "Ungültige Eingabe"
+      speaktext "Ungültige Eingabe"
     fi
   done
 fi
